@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff2E3645),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, CharacterSheetScreen.id);
@@ -27,55 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 5,
             ),
-            Container(
-              height: 60,
-              color: Colors.blue[100],
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // SizedBox(
-                    //   width: 10,
-                    // ),
-                    Text(
-                      'Lyzz, the ancestral sniper',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Icon(Icons.more_vert),
-                  ],
-                ),
-              ),
-            ),
+            ListItem(name: "Lyzz"),
             SizedBox(
               height: 5,
             ),
-            Container(
-              height: 60,
-              color: Colors.blue[100],
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // SizedBox(
-                    //   width: 10,
-                    // ),
-                    Text(
-                      'Mech Chiaveinglese',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Icon(Icons.more_vert),
-                  ],
-                ),
-              ),
-            ),
+            ListItem(name: "Mech Chiaveinglese"),
           ],
         ),
       ),
@@ -84,6 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class ListItem extends StatefulWidget {
+  final String name;
+
+  ListItem({@required this.name});
+
   @override
   _ListItemState createState() => _ListItemState();
 }
@@ -92,9 +52,38 @@ class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      color: Colors.amber[100],
-      child: const Center(child: Text('Entry C')),
+      margin: new EdgeInsets.fromLTRB(10, 10, 10, 0),
+      height: 60,
+      decoration: new BoxDecoration(
+        color: Color(0xff415478),
+        borderRadius: new BorderRadius.only(
+          topLeft: const Radius.circular(7.0),
+          topRight: const Radius.circular(7.0),
+          bottomLeft: const Radius.circular(7.0),
+          bottomRight: const Radius.circular(7.0),
+        ),
+      ),
+      // color: Colors.blue[100],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 8, 8, 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              widget.name,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            ),
+            Icon(
+              Icons.more_vert,
+              color: Colors.white,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lallotales_character_creator/services/db_service.dart';
+import 'package:lallotales_character_creator/services/character.dart';
 import 'package:lallotales_character_creator/utilities/my_divider.dart';
 import 'package:lallotales_character_creator/utilities/my_text_field.dart';
 
