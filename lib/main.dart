@@ -7,15 +7,25 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'lallotales character creator',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: const Color(0xff2E3645),
+          accentColor: const Color(0xff415478),
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          textTheme: const TextTheme(
+            headline1: TextStyle(
+                fontSize: 27, fontWeight: FontWeight.w400, color: Colors.white),
+            headline2: TextStyle(
+                fontSize: 22, fontWeight: FontWeight.w400, color: Colors.white),
+            headline3: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
+            bodyText1: TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
+          ),
         ),
         initialRoute: HomeScreen.id,
         routes: {

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:lallotales_character_creator/screens/character_sheet_screen.dart';
+import 'package:lallotales_character_creator/services/character.dart';
+import 'package:lallotales_character_creator/services/db_service.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = 'home_screen';
@@ -9,77 +12,136 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool _loaded = false;
   @override
   Widget build(BuildContext context) {
+    if (!_loaded) {
+      DBService.load().then((_) {
+        _loaded = true;
+        setState(() {});
+      });
+    }
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xff2E3645),
+        appBar: AppBar(
+          title: Text(
+            "characters",
+            style: Theme.of(context).textTheme.headline1,
+          ),
+        ),
+        backgroundColor: const Color(0xff2E3645),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, CharacterSheetScreen.id);
+            characterList.add(Character());
+            DBService.save();
+            Navigator.pushNamed(context, CharacterSheetScreen.id,
+                    arguments: characterList.length - 1)
+                .then((value) => setState(() {}));
           },
-          child: Icon(Icons.add),
-          backgroundColor: Colors.blue,
+          backgroundColor: Theme.of(context).accentColor,
+          child: const Icon(Icons.add),
         ),
-        body: ListView(
+        body: ListView.builder(
           padding: const EdgeInsets.all(0),
-          children: <Widget>[
-            SizedBox(
-              height: 5,
-            ),
-            ListItem(name: "Lyzz"),
-            SizedBox(
-              height: 5,
-            ),
-            ListItem(name: "Mech Chiaveinglese"),
-          ],
+          itemCount: characterList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListItem(
+              characterIndex: index,
+              parent: this,
+            );
+          },
         ),
       ),
     );
   }
 }
 
-class ListItem extends StatefulWidget {
-  final String name;
+class ListItem extends StatelessWidget {
+  final int characterIndex;
+  final State parent;
 
-  ListItem({@required this.name});
+  const ListItem({@required this.characterIndex, @required this.parent});
 
-  @override
-  _ListItemState createState() => _ListItemState();
-}
-
-class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+
+    Character characterToRemove;
+    final Character character = characterList[characterIndex];
+
+    Widget getAlertBuilder(BuildContext context) {
+      return AlertDialog(
+        title: const Text('Are you sure you want to remove the character? '),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              characterList.remove(characterToRemove);
+              DBService.save();
+              Navigator.pop(context);
+            },
+            child: const Text('Yes'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('No'),
+          ),
+        ],
+      );
+    }
+
     return Container(
-      margin: new EdgeInsets.fromLTRB(10, 10, 10, 0),
+      margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       height: 60,
-      decoration: new BoxDecoration(
-        color: Color(0xff415478),
-        borderRadius: new BorderRadius.only(
-          topLeft: const Radius.circular(7.0),
-          topRight: const Radius.circular(7.0),
-          bottomLeft: const Radius.circular(7.0),
-          bottomRight: const Radius.circular(7.0),
+      decoration: BoxDecoration(
+        color: themeData.accentColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(7.0),
+          topRight: Radius.circular(7.0),
+          bottomLeft: Radius.circular(7.0),
+          bottomRight: Radius.circular(7.0),
         ),
       ),
-      // color: Colors.blue[100],
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 8, 8, 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              widget.name,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    CharacterSheetScreen.id,
+                    arguments: characterIndex,
+                  ).then((_) {
+                    // ignore: invalid_use_of_protected_member
+                    parent.setState(() {});
+                  });
+                },
+                child: Text(
+                  character.name,
+                  style: Theme.of(context).textTheme.headline2,
+                ),
               ),
             ),
-            Icon(
-              Icons.more_vert,
-              color: Colors.white,
+            GestureDetector(
+              onTapDown: (TapDownDetails details) {
+                characterToRemove = character;
+                showDialog(context: context, builder: getAlertBuilder)
+                    .then((_) {
+                  // ignore: invalid_use_of_protected_member
+                  parent.setState(() {});
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "x",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+              ),
             ),
           ],
         ),
