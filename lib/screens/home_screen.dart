@@ -12,15 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _loaded = false;
   @override
   Widget build(BuildContext context) {
-    if (!_loaded) {
-      DBService.load().then((_) {
-        _loaded = true;
-        setState(() {});
-      });
-    }
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

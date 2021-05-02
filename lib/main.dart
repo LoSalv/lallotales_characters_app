@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lallotales_character_creator/screens/character_sheet_screen.dart';
 import 'package:lallotales_character_creator/screens/home_screen.dart';
+import 'package:lallotales_character_creator/services/db_service.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DBService.load();
   runApp(MyApp());
 }
 
