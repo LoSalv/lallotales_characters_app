@@ -80,13 +80,13 @@ class _CharacterSheetScreenState extends State<CharacterSheetScreen>
           ),
         ),
         body: TabBarView(
+          controller: _tabController,
           children: [
             GeneralInfoTab(char: character),
             DescriptionTab(character: character),
             AbilitiesTab(char: character),
             InventoryTab(char: character),
           ],
-          controller: _tabController,
         ),
       ),
     );

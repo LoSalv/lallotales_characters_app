@@ -71,8 +71,6 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-
     Character characterToRemove;
     final Character character = characterList[characterIndex];
 

@@ -31,7 +31,6 @@ class MyTextFieldWithLabel extends StatelessWidget {
     final OutlineInputBorder border = OutlineInputBorder(
       borderSide: BorderSide(
         color: Theme.of(context).disabledColor,
-        width: 1,
       ),
       borderRadius: BorderRadius.circular(15),
     );

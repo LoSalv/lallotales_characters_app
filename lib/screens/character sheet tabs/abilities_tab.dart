@@ -504,32 +504,89 @@ class _EditAttributeValueAlertDialogState
         widget.attribute.name,
         style: Theme.of(context).textTheme.headline2,
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          MyTextFieldWithLabel(
-            label: "",
-            inputType: TextInputType.number,
-            padding: const EdgeInsets.fromLTRB(10, 30, 20, 0),
-            textAlign: TextAlign.right,
-            initialValue: currentValue ?? widget.attribute.value.toString(),
-            onChanged: (value) => currentValue = value,
-            onSubmitted: (value) {
-              try {
-                int.parse(value);
+      content: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextButton(
+              onPressed: () {
+                if (!isValueValid) {
+                  setState(() {
+                    widget.attribute.value = 0;
+                    currentValue = 0.toString();
+                    isValueValid = true;
+                    return;
+                  });
+                }
+
                 setState(() {
-                  isValueValid = true;
+                  widget.attribute.value -= 1;
+                  currentValue = widget.attribute.value.toString();
                 });
-              } on FormatException {
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: Icon(
+                  Icons.remove,
+                  size: 30,
+                  color: Theme.of(context).accentColor,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 100,
+              child: MyTextFieldWithLabel(
+                label: "",
+                inputType: TextInputType.number,
+                padding: const EdgeInsets.fromLTRB(4, 30, 0, 0),
+                textAlign: TextAlign.center,
+                initialValue: currentValue ?? widget.attribute.value.toString(),
+                onChanged: (value) => currentValue = value,
+                onSubmitted: (value) {
+                  try {
+                    int.parse(value);
+                    setState(() {
+                      isValueValid = true;
+                    });
+                  } on FormatException {
+                    setState(() {
+                      isValueValid = false;
+                    });
+                  }
+                },
+                showError: !isValueValid,
+                errorText: 'invalid number',
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                if (!isValueValid) {
+                  setState(() {
+                    widget.attribute.value = 0;
+                    currentValue = 0.toString();
+                    isValueValid = true;
+                    return;
+                  });
+                }
+
                 setState(() {
-                  isValueValid = false;
+                  widget.attribute.value += 1;
+                  currentValue = widget.attribute.value.toString();
                 });
-              }
-            },
-            showError: !isValueValid,
-            errorText: 'invalid number',
-          ),
-        ],
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: Icon(
+                  Icons.add,
+                  size: 30,
+                  color: Theme.of(context).accentColor,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       actions: [
         TextButton(
