@@ -30,8 +30,8 @@ class MyTextFieldWithLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final OutlineInputBorder border = OutlineInputBorder(
       borderSide: BorderSide(
-        color: Theme.of(context).accentColor,
-        width: 2,
+        color: Theme.of(context).disabledColor,
+        width: 1,
       ),
       borderRadius: BorderRadius.circular(15),
     );
@@ -53,6 +53,9 @@ class MyTextFieldWithLabel extends StatelessWidget {
         textAlign: textAlign ?? TextAlign.left,
         style: Theme.of(context).textTheme.bodyText1,
         decoration: InputDecoration(
+          // filled: true,
+          // fillColor: Theme.of(context).accentColor,
+          // focusColor: Theme.of(context).accentColor,
           errorText: showError ? errorText : null,
           errorBorder: errBorder,
           focusedErrorBorder: errBorder,
@@ -64,7 +67,7 @@ class MyTextFieldWithLabel extends StatelessWidget {
           focusedBorder: border,
           labelStyle: TextStyle(
             fontSize: 20,
-            color: showError ? Colors.red : Colors.blue,
+            color: showError ? Colors.red : Theme.of(context).accentColor,
             fontWeight: labelWeight ?? FontWeight.normal,
           ),
         ),

@@ -15,34 +15,48 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "characters",
-            style: Theme.of(context).textTheme.headline1,
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Theme.of(context).primaryColor,
+            Theme.of(context).accentColor,
+          ],
+        )),
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            title: Text(
+              "characters",
+              style: Theme.of(context).textTheme.headline1,
+            ),
           ),
-        ),
-        backgroundColor: const Color(0xff2E3645),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            characterList.add(Character());
-            DBService.save();
-            Navigator.pushNamed(context, CharacterSheetScreen.id,
-                    arguments: characterList.length - 1)
-                .then((value) => setState(() {}));
-          },
-          backgroundColor: Theme.of(context).accentColor,
-          child: const Icon(Icons.add),
-        ),
-        body: ListView.builder(
-          padding: const EdgeInsets.all(0),
-          itemCount: characterList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListItem(
-              characterIndex: index,
-              parent: this,
-            );
-          },
+          backgroundColor: Colors.transparent,
+          floatingActionButton: FloatingActionButton(
+            elevation: 0,
+            onPressed: () {
+              characterList.add(Character());
+              DBService.save();
+              Navigator.pushNamed(context, CharacterSheetScreen.id,
+                      arguments: characterList.length - 1)
+                  .then((value) => setState(() {}));
+            },
+            backgroundColor: Colors.transparent.withOpacity(0.2),
+            child: const Icon(Icons.add),
+          ),
+          body: ListView.builder(
+            padding: const EdgeInsets.all(0),
+            itemCount: characterList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListItem(
+                characterIndex: index,
+                parent: this,
+              );
+            },
+          ),
         ),
       ),
     );
@@ -88,7 +102,8 @@ class ListItem extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       height: 60,
       decoration: BoxDecoration(
-        color: themeData.accentColor,
+        // color: themeData.accentColor,
+        color: Colors.transparent.withOpacity(0.2),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(7.0),
           topRight: Radius.circular(7.0),

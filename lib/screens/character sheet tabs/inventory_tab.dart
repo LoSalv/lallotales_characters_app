@@ -448,7 +448,7 @@ class ListItem extends StatelessWidget {
         });
       },
       child: Card(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).disabledColor,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 15, 8, 10),
           child: Text(

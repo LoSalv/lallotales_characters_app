@@ -154,7 +154,7 @@ class AttributeField extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.blue,
+              color: Theme.of(context).disabledColor,
             ),
             borderRadius: BorderRadius.circular(15),
           ),
@@ -167,7 +167,9 @@ class AttributeField extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(6, 4, 0, 2),
                   child: Text(
                     attribute.name,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          color: Theme.of(context).accentColor,
+                        ),
                   ),
                 ),
               ),
@@ -205,7 +207,9 @@ class Header extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: Theme.of(context).textTheme.headline2,
+              style: Theme.of(context).textTheme.headline2.copyWith(
+                    color: Theme.of(context).accentColor,
+                  ),
             ),
           ),
           GestureDetector(
@@ -300,7 +304,11 @@ class MyTile extends StatelessWidget {
           });
         },
         child: ExpansionTile(
-          title: Text(title, style: Theme.of(context).textTheme.headline3),
+          title: Text(title,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline3
+                  .copyWith(color: Theme.of(context).disabledColor)),
           trailing: const Icon(
             Icons.keyboard_arrow_down,
             color: Colors.white,

@@ -9,6 +9,21 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
+const List<List<Color>> colors = [
+  [
+    Color(0xff2E3645),
+    Color.fromARGB(255, 143, 93, 166),
+    Color.fromARGB(255, 239, 106, 187)
+  ],
+  [
+    Color(0xff2A3950),
+    Color(0xff355C7D),
+    Color(0xff725A7A),
+    Color(0xffC56D86),
+    Color(0xffFF7582),
+  ],
+];
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,9 +31,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'lallotales character creator',
         theme: ThemeData(
-          primaryColor: const Color(0xff2E3645),
-          accentColor: const Color(0xff415478),
+          primaryColor: colors[1][0],
+          // primaryColor: const Color.fromRGBO(63, 81, 181, 1),
+          // accentColor: const Color(0xff415478),
+          accentColor: colors[1][4],
+          disabledColor: colors[1][2],
+          // accentColor: const Color.fromARGB(220, 34, 204, 227),
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          splashColor: Colors.transparent,
           textTheme: const TextTheme(
             headline1: TextStyle(
                 fontSize: 27, fontWeight: FontWeight.w400, color: Colors.white),

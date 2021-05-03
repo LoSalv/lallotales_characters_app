@@ -14,34 +14,79 @@ class CharacterSheetScreen extends StatefulWidget {
   _CharacterSheetScreenState createState() => _CharacterSheetScreenState();
 }
 
-class _CharacterSheetScreenState extends State<CharacterSheetScreen> {
+class _CharacterSheetScreenState extends State<CharacterSheetScreen>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
+
+  void _handleTabSelection() {
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 4, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final int characterIndex = ModalRoute.of(context).settings.arguments as int;
     final Character character = characterList[characterIndex];
+    final Color notSelectedIconColor = Theme.of(context).disabledColor;
 
     return SafeArea(
-      child: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          appBar: AppBar(
-              title: Text(character.name),
-              bottom: const TabBar(
-                tabs: [
-                  Tab(icon: Icon(Icons.face)),
-                  Tab(icon: Icon(Icons.accessibility_new_outlined)),
-                  Tab(icon: Icon(Icons.stars)),
-                  Tab(icon: Icon(Icons.shield)),
-                ],
-              )),
-          body: TabBarView(
-            children: [
-              GeneralInfoTab(char: character),
-              DescriptionTab(character: character),
-              AbilitiesTab(char: character),
-              InventoryTab(char: character),
+      child: Scaffold(
+        appBar: AppBar(
+          foregroundColor: Theme.of(context).accentColor,
+          title: Text(character.name),
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).accentColor,
+            controller: _tabController,
+            tabs: [
+              Tab(
+                icon: Icon(Icons.face,
+                    color: _tabController.index == 0
+                        ? Theme.of(context).accentColor
+                        : notSelectedIconColor),
+              ),
+              Tab(
+                icon: Icon(Icons.accessibility_new_outlined,
+                    color: _tabController.index == 1
+                        ? Theme.of(context).accentColor
+                        : notSelectedIconColor),
+              ),
+              Tab(
+                icon: Icon(Icons.stars,
+                    color: _tabController.index == 2
+                        ? Theme.of(context).accentColor
+                        : notSelectedIconColor),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.shield,
+                  color: _tabController.index == 3
+                      ? Theme.of(context).accentColor
+                      : notSelectedIconColor,
+                ),
+              ),
             ],
           ),
+        ),
+        body: TabBarView(
+          children: [
+            GeneralInfoTab(char: character),
+            DescriptionTab(character: character),
+            AbilitiesTab(char: character),
+            InventoryTab(char: character),
+          ],
+          controller: _tabController,
         ),
       ),
     );
