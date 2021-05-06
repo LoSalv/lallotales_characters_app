@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lallotales_character_creator/screens/character_sheet_screen.dart';
 import 'package:lallotales_character_creator/screens/home_screen.dart';
@@ -6,6 +8,12 @@ import 'package:lallotales_character_creator/services/db_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DBService.load();
+  // Directory('lallotales').create()
+  //     // The created directory is returned as a Future.
+  //     .then((Directory directory) {
+  //   print(directory.path);
+  // });
+
   runApp(MyApp());
 }
 
@@ -39,6 +47,7 @@ class MyApp extends StatelessWidget {
           // accentColor: const Color.fromARGB(220, 34, 204, 227),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           splashColor: Colors.transparent,
+          unselectedWidgetColor: colors[1][2],
           textTheme: const TextTheme(
             headline1: TextStyle(
                 fontSize: 27, fontWeight: FontWeight.w400, color: Colors.white),

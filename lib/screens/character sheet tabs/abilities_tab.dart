@@ -264,63 +264,68 @@ class MyTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onLongPress: () {
-          showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (_) => EditFeatAlertDialog(
-              title: isMagicalSkill ? 'edit magical skill' : 'edit feat',
-              name: title,
-              description: body,
-            ),
-          ).then((value) {
-            if (value == null) return;
-            // ignore: invalid_use_of_protected_member
-            parent.setState(() {
-              if (value == "remove") {
-                // ignore: invalid_use_of_protected_member
-                parent.setState(() {
-                  if (isMagicalSkill) {
-                    character.magicalSkills.remove(feat);
-                    DBService.save();
-                  } else {
-                    character.feats.remove(feat);
-                    DBService.save();
-                  }
-                });
-                return;
-              }
-              final Feat f = value as Feat;
-              if (isMagicalSkill) {
-                final int index = character.magicalSkills.indexOf(feat);
-                character.magicalSkills[index] = f;
-                DBService.save();
-              } else {
-                final int index = character.feats.indexOf(feat);
-                character.feats[index] = f;
-                DBService.save();
-              }
-            });
-          });
-        },
-        child: ExpansionTile(
-          title: Text(title,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline3
-                  .copyWith(color: Theme.of(context).disabledColor)),
-          trailing: const Icon(
-            Icons.keyboard_arrow_down,
-            color: Colors.white,
+      onLongPress: () {
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (_) => EditFeatAlertDialog(
+            title: isMagicalSkill ? 'edit magical skill' : 'edit feat',
+            name: title,
+            description: body,
           ),
-          onExpansionChanged: (opening) {},
-          children: [
-            Text(
+        ).then((value) {
+          if (value == null) return;
+          // ignore: invalid_use_of_protected_member
+          parent.setState(() {
+            if (value == "remove") {
+              // ignore: invalid_use_of_protected_member
+              parent.setState(() {
+                if (isMagicalSkill) {
+                  character.magicalSkills.remove(feat);
+                  DBService.save();
+                } else {
+                  character.feats.remove(feat);
+                  DBService.save();
+                }
+              });
+              return;
+            }
+            final Feat f = value as Feat;
+            if (isMagicalSkill) {
+              final int index = character.magicalSkills.indexOf(feat);
+              character.magicalSkills[index] = f;
+              DBService.save();
+            } else {
+              final int index = character.feats.indexOf(feat);
+              character.feats[index] = f;
+              DBService.save();
+            }
+          });
+        });
+      },
+      child: ExpansionTile(
+        title: Text(title,
+            style: Theme.of(context)
+                .textTheme
+                .headline3
+                .copyWith(color: Theme.of(context).disabledColor)),
+        trailing: const Icon(
+          Icons.keyboard_arrow_down,
+          color: Colors.white,
+        ),
+        onExpansionChanged: (opening) {},
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Text(
               body,
               style: Theme.of(context).textTheme.bodyText1,
-            )
-          ],
-        ));
+              textAlign: TextAlign.left,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 

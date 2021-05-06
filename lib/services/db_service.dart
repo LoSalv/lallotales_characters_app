@@ -43,6 +43,10 @@ List<Character> characterList = [
     link: "bolt medallion",
     stance: "magic must used to do good",
     objective: "learn and do good",
+    description:
+        "High and thin, definite muscles , long blond hair, pointy ears.",
+    attitude: "Easygoing.",
+    background: "He was taught by his father.",
     feats: [
       Feat(
           name: 'Arcana Knowledge',
