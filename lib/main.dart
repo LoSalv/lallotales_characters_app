@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:lallotales_character_creator/screens/character_sheet_screen.dart';
 import 'package:lallotales_character_creator/screens/home_screen.dart';

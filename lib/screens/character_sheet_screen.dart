@@ -83,7 +83,7 @@ class _CharacterSheetScreenState extends State<CharacterSheetScreen>
           controller: _tabController,
           children: [
             GeneralInfoTab(char: character),
-            DescriptionTab(character: character),
+            DescriptionTab(char: character),
             AbilitiesTab(char: character),
             InventoryTab(char: character),
           ],

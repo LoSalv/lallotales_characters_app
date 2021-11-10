@@ -26,7 +26,7 @@ dependencies:
   firebase_core: "^0.7.0"
   flutter:
     sdk: flutter
-  image_picker: ^0.7.4
+  image_picker: ^0.8.4+4
   shared_preferences: ^2.0.5
 
 dependency_overrides:
@@ -39,7 +39,7 @@ dev_dependencies:
     sdk: flutter
   lint: ^1.0.0
 
-flutter_icons: 
+flutter_icons:
   ios: true
   android: true
   image_path_ios: "icon/icon.png"
