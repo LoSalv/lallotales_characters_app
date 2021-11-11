@@ -52,9 +52,6 @@ class MyTextFieldWithLabel extends StatelessWidget {
         textAlign: textAlign ?? TextAlign.left,
         style: Theme.of(context).textTheme.bodyText1,
         decoration: InputDecoration(
-          // filled: true,
-          // fillColor: Theme.of(context).accentColor,
-          // focusColor: Theme.of(context).accentColor,
           errorText: showError ? errorText : null,
           errorBorder: errBorder,
           focusedErrorBorder: errBorder,

@@ -137,7 +137,7 @@ class Character {
         inventorySections = (json['inventorySections'] as List)
             .map((e) => InventorySection.fromJson(e as Map<String, dynamic>))
             .toList(),
-        imagePath = json['imageFile'] as String;
+        imagePath = json['imagePath'] as String;
 }
 
 class InventorySection {

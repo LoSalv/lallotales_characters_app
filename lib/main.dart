@@ -6,11 +6,6 @@ import 'package:lallotales_character_creator/services/db_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DBService.load();
-  // Directory('lallotales').create()
-  //     // The created directory is returned as a Future.
-  //     .then((Directory directory) {
-  //   print(directory.path);
-  // });
 
   runApp(MyApp());
 }
@@ -19,7 +14,7 @@ const List<List<Color>> colors = [
   [
     Color(0xff2E3645),
     Color.fromARGB(255, 143, 93, 166),
-    Color.fromARGB(255, 239, 106, 187)
+    Color.fromARGB(255, 239, 106, 187),
   ],
   [
     Color(0xff2A3950),
@@ -38,11 +33,8 @@ class MyApp extends StatelessWidget {
         title: 'lallotales character creator',
         theme: ThemeData(
           primaryColor: colors[1][0],
-          // primaryColor: const Color.fromRGBO(63, 81, 181, 1),
-          // accentColor: const Color(0xff415478),
           accentColor: colors[1][4],
           disabledColor: colors[1][2],
-          // accentColor: const Color.fromARGB(220, 34, 204, 227),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           splashColor: Colors.transparent,
           unselectedWidgetColor: colors[1][2],

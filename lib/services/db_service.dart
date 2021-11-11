@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'character.dart';
 
@@ -8,8 +7,8 @@ class DBService {
     final prefs = await SharedPreferences.getInstance();
     final String json = jsonEncode(characterList);
     prefs.setString('characters', json);
-    // ignore: avoid_print
-    if (kDebugMode) print('saved');
+    print('saved');
+    String js = prefs.getString('characters');
     return;
   }
 
@@ -20,8 +19,8 @@ class DBService {
     characterList = (jsonDecode(json) as List)
         .map((e) => Character.fromJson(e as Map<String, dynamic>))
         .toList();
-    // ignore: avoid_print
-    if (kDebugMode) print("loading: $characterList");
+    print("loading: $characterList");
+    print(characterList[0].imagePath);
     return;
   }
 }
@@ -44,7 +43,7 @@ List<Character> characterList = [
     stance: "magic must used to do good",
     objective: "learn and do good",
     description:
-        "High and thin, definite muscles , long blond hair, pointy ears.",
+        "High and thin, definite muscles, long blond hair, pointy ears.",
     attitude: "Easygoing.",
     background: "He was taught by his father.",
     feats: [
