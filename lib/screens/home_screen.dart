@@ -100,7 +100,6 @@ class ListItem extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       height: 60,
       decoration: BoxDecoration(
-        // color: themeData.accentColor,
         color: Colors.transparent.withOpacity(0.2),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(7.0),
