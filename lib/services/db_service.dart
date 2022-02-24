@@ -8,7 +8,7 @@ class DBService {
     final String json = jsonEncode(characterList);
     prefs.setString('characters', json);
     print('saved');
-    String js = prefs.getString('characters');
+    // String js = prefs.getString('characters');
     return;
   }
 

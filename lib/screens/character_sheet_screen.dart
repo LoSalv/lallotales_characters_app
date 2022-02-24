@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lallotales_character_creator/screens/character%20sheet%20tabs/abilities_tab.dart';
 import 'package:lallotales_character_creator/screens/character%20sheet%20tabs/description_tab.dart';
@@ -46,6 +45,7 @@ class _CharacterSheetScreenState extends State<CharacterSheetScreen>
         appBar: AppBar(
           foregroundColor: Theme.of(context).accentColor,
           title: Text(character.name),
+          backgroundColor: Theme.of(context).primaryColor,
           bottom: TabBar(
             indicatorColor: Theme.of(context).accentColor,
             controller: _tabController,
